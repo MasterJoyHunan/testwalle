@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,6 +16,7 @@ func main(){
 		})
 	})
 
+	time.After(1 * time.Second)
 	log.Panic(route.Run("0.0.0.0:8888"))
 }
 
