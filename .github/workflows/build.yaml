@@ -22,6 +22,10 @@ jobs:
       - name: Export tag
         run: |
           export COMMIT_TIME=$(date +%Y_%m_%d_%H_%M)
+          
+      - name: Echo tag
+        run: |
+          echo ${COMMIT_TIME}
       
       # 1.准备一个 Go 编译环境。
       - name: Set up Go ${{ matrix.go_version }}
