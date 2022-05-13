@@ -14,9 +14,9 @@ jobs:
 
     steps:
       # 1.设置打包 tag。
-      - name: Export tag
-        run: |
-          echo "NOW::$(date +'%Y_%m_%d_%H_%M')" >> $GITHUB_ENV
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=today::$(date +'%Y-%m-%d')"
 
       # 2.下载源码。
       - name: Check out code into the Go module directory
@@ -26,7 +26,7 @@ jobs:
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-GitHub-Action@master
         with:
-          name: registry.cn-hangzhou.aliyuncs.com/tanwuyang/walle-test:$NOW  # docker image 的名字
+          name: registry.cn-hangzhou.aliyuncs.com/tanwuyang/walle-test:${{steps.date.outputs.today}}   # docker image 的名字
           username: ${{ secrets.DOCKER_USERNAME}} # 用户名
           password: ${{ secrets.DOCKER_PASSWORD }} # 密码
           registry: registry.cn-hangzhou.aliyuncs.com # 腾讯云Registry
