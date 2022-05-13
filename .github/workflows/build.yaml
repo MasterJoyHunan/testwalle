@@ -6,9 +6,9 @@ on:
       - master
 
 jobs:
-  build:
+  test-walle-build:
     name: Test with go 1.16 on ubuntu-latest
-    runs-on: 1.16
+    runs-on: ubuntu-latest
     environment:
       name: test-walle
 
