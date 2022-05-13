@@ -3,8 +3,8 @@ package main
 import (
 	_ "embed"
 	"log"
-	"time"
 
+	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,6 +13,7 @@ var dockerFile []byte
 
 func main() {
 	route := gin.Default()
+	pprof.Register(route)
 	route.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"code":    1,
@@ -27,6 +28,5 @@ func main() {
 		})
 	})
 
-	time.After(1 * time.Second)
 	log.Panic(route.Run("0.0.0.0:8821"))
 }

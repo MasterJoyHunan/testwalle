@@ -2,7 +2,10 @@ module testwalle
 
 go 1.18
 
-require github.com/gin-gonic/gin v1.7.7
+require (
+	github.com/gin-contrib/pprof v1.3.0
+	github.com/gin-gonic/gin v1.7.7
+)
 
 require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
