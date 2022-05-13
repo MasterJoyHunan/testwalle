@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      -
 before_script:
   - export COMMIT_TIME=$(date +%Y_%m_%d_%H_%M)
 
