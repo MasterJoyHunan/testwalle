@@ -7,7 +7,7 @@ RUN go mod tidy && \
     go mod download && \
     sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
     apk add tzdata
-RUN go build -o admin
+RUN CGO_ENABLED=0 go build -ldflags "-s -w" -o admin
 
 # 打包
 FROM alpine as runner
