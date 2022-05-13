@@ -4,12 +4,8 @@ on:
   push:
     branches:
       - master
-before_script:
-  - export COMMIT_TIME=$(date +%Y_%m_%d_%H_%M)
 
 jobs:
-  script:
-    echo ${COMMIT_TIME}
 
   build:
     name: Test with go ${{ matrix.go_version }} on ${{ matrix.os }}
@@ -23,6 +19,10 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
+      - name: Export tag
+        run: |
+          export COMMIT_TIME=$(date +%Y_%m_%d_%H_%M)
+      
       # 1.准备一个 Go 编译环境。
       - name: Set up Go ${{ matrix.go_version }}
         uses: actions/setup-go@v2
