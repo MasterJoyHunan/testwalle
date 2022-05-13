@@ -1,12 +1,13 @@
 # 构建
-FROM golang:1.15-alpine as builder
+FROM golang:1.18-alpine as builder
 WORKDIR /home/project
 ENV GOPROXY=https://goproxy.cn
 COPY ./ ./
-RUN go mod download && \
-sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
-apk add tzdata
-RUN CGO_ENABLED=0 go build -ldflags "-s -w" -o admin
+RUN go mod tidy && \
+    go mod download && \
+    sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
+    apk add tzdata
+RUN go build -o admin
 
 # 打包
 FROM alpine as runner
